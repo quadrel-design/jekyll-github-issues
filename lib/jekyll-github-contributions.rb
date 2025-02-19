@@ -3,11 +3,11 @@ require 'net/http'
 require 'json'
 
 module Jekyll
-  # Generates a github issues data file
+  # Generates a GitHub issues data file
   class GithubIssuesGenerator < Jekyll::Generator
     DATA_FILE = '_data/github-issues.json'.freeze
     GITHUB_API_HOST = 'api.github.com'.freeze
-    ISSUES_URL = '/search/issues?q=author:%s&per_page=100&page=%i'.freeze
+    ISSUES_URL = '/search/issues?q=author:%s&per_page=100&page=%i'.freeze  # Geändert: Suche nach Issues
 
     def generate(site)
       settings = {
@@ -28,7 +28,7 @@ module Jekyll
         url = format(ISSUES_URL, settings['username'], page)
         response = client.get(url, 'Accept' => 'application/json')
         if response.code != '200'
-          Jekyll.logger.warn "Cound not retrieve Github data: #{response.body}"
+          Jekyll.logger.warn "Could not retrieve GitHub data: #{response.body}"
           return
         end
 
